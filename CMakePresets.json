@@ -79,6 +79,7 @@
       "cacheVariables": {
         "QT_VERSION": "6",
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "CMAKE_PREFIX_PATH": "${sourceDir}/../obs-studio/dist/install/debian-trixie-x86_64-portable",
         "ENABLE_FRONTEND_API": false,
         "ENABLE_QT": false
       }

@@ -86,7 +86,18 @@ macro(find_qt)
       add_library(Qt::${component} INTERFACE IMPORTED)
       set_target_properties(Qt::${component} PROPERTIES INTERFACE_LINK_LIBRARIES Qt${_QT_VERSION}::${component})
     endif()
-    set_property(TARGET Qt::${component} PROPERTY INTERFACE_COMPILE_FEATURES "")
+    set(_target_to_modify "Qt::${component}")
+    if(TARGET ${_target_to_modify})
+      # Check if this target is an ALIAS for another target.
+      get_target_property(_aliased_target ${_target_to_modify} ALIASED_TARGET)
+      if(_aliased_target)
+        # If it is an alias, we must use the original target name.
+        set(_target_to_modify "${_aliased_target}")
+      endif()
+
+      # Now, set the property on the REAL target (which may be the alias's original target).
+      set_property(TARGET ${_target_to_modify} PROPERTY INTERFACE_COMPILE_FEATURES "")
+    endif()
   endforeach()
 
 endmacro()

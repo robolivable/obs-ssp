@@ -7,7 +7,7 @@ project(${_name} VERSION ${_version})
 set(CMAKE_COMPILE_WARNING_AS_ERROR OFF)
 
 set(ENABLE_FRONTEND_API "Use obs-frontend-api for UI functionality" OFF)
-set(ENABLE_QT "Use Qt functionality" ON)
+set(ENABLE_QT "Use Qt functionality" OFF)
 
 include(compilerconfig)
 include(defaults)
@@ -64,7 +64,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE ${obs-ssp_SOURCES})
 # /!\ TAKE NOTE: No need to edit things past this point /!\
 
 # --- Platform-independent build settings ---
-find_package(FFmpeg REQUIRED COMPONENTS AVCODEC AVUTIL)
+find_package(FFmpeg REQUIRED COMPONENTS avcodec avutil)
 add_subdirectory(thirdpty)
 
 target_include_directories(
